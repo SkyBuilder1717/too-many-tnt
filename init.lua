@@ -8,7 +8,10 @@ local S = core.get_translator(modname)
 local Stnt = core.get_translator("tnt")
 
 local enable_tnt = core.settings:get_bool("enable_tnt", true)
-if
+if not core.registered_nodes["tnt:tnt"] then
+    error("TNT mod requires to be enabled!")
+    return
+end
 
 local tnt_radius = tonumber(core.settings:get("tnt_radius") or 3)
 
