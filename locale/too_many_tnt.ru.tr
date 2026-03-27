@@ -1,0 +1,72 @@
+# textdomain: too_many_tnt
+
+# ContentDB
+Too Much TNT!=Слишком Много Динамита!
+Adds a lot of TNT for Minetest Game to make gameplay more fun!=Добавляет множество типов динамита в Minetest Game, чтобы сделать геймплей ещё веселее!
+
+# Nodes
+Animal TNT=Животный ТНТ
+Blackhole TNT=Чёрная дыра ТНТ
+Brick House TNT=Кирпичный Дом ТНТ
+Chaos TNT=Хаосный ТНТ
+Challenge TNT=Задание ТНТ
+Confetti TNT=Конфетти ТНТ
+Cube TNT=Кубический ТНТ
+Diamond TNT=Алмазный ТНТ
+Digging TNT=Копающий ТНТ
+Drilling TNT=Сверливающий ТНТ
+Fake TNT=Фальшивый ТНТ
+Fire TNT=Огненный ТНТ
+Firework TNT=Фейрверк ТНТ
+Floating Island TNT=Летающий Остров ТНТ
+Flower TNT=Цветочный ТНТ
+Freeze TNT=Заморазвающий ТНТ
+Glitch TNT=Лаг ТНТ
+House TNT=Дом ТНТ
+Hurricane TNT=Ураган ТНТ
+Labyrinth TNT=Лабиринт ТНТ
+Lava TNT=Лавовый ТНТ
+Long TNT=Длинный ТНТ
+Meteor TNT=Метеор ТНТ
+Multiply TNT=Умножающий ТНТ
+Nuclear TNT=Ядерный ТНТ
+Omega TNT=Омега ТНТ
+Piston Door TNT=Поршневая Дверь ТНТ
+Poison TNT=Отравляющий ТНТ
+Pyramid TNT=Пирамида ТНТ
+Random Item TNT=Случайный Предмет ТНТ
+Random TNT=Случайный ТНТ
+Random Teleport TNT=Случайно Телепортирующий ТНТ
+Remote TNT=ТНТ на пульте управления
+Reverse TNT=Реверс ТНТ
+Sand Firework TNT=Песочный Дождь ТНТ
+Shuffle TNT=Перемешивающий ТНТ
+Snow TNT=Снежный ТНТ
+Sphere TNT=Сферический ТНТ
+Sponge TNT=Губка ТНТ
+Super House TNT=Супер Дом ТНТ
+Switch TNT=Меняющий ТНТ
+Technical TNT=Технический ТНТ
+Teleport TNT=Телепортирующий ТНТ
+Trap TNT=Ловушка ТНТ
+Tree TNT=Дерево ТНТ
+Wash TNT=Моющий ТНТ
+Water TNT=Водяной ТНТ
+Wooden House TNT=Деревянный Дом ТНТ
+
+# Other Nodes
+Glitch Block=Лагающий Блок
+Meteor=Метеорит
+Super=Супер
+TNT=ТНТ
+
+# Items
+Remote=Пульт управления
+Atomic Bomb=Атомная Бомба
+Demon Core=Ядро Демона
+Engine=Движок
+Unstable Particle=Нестабильная Частица
+
+# Messages
+ATOMIC BOMB EXPLODED BY @1!=АТОМНАЯ БОМБА ВЗОРВАНА @1!
+OMEGA ATOMIC BOMB EXPLODED BY @1!=ОМЕГА АТОМНАЯ БОМБА ВЗОРВАНА ИГРОКОМ @1!

@@ -1,0 +1,72 @@
+# textdomain: too_many_tnt
+
+# ContentDB
+Too Much TNT!=
+Adds a lot of TNT for Minetest Game to make gameplay more fun!=
+
+# Nodes
+Animal TNT=
+Blackhole TNT=
+Brick House TNT=
+Chaos TNT=
+Challenge TNT=
+Confetti TNT=
+Cube TNT=
+Diamond TNT=
+Digging TNT=
+Drilling TNT=
+Fake TNT=
+Fire TNT=
+Firework TNT=
+Floating Island TNT=
+Flower TNT=
+Freeze TNT=
+Glitch TNT=
+House TNT=
+Hurricane TNT=
+Labyrinth TNT=
+Lava TNT=
+Long TNT=
+Meteor TNT=
+Multiply TNT=
+Nuclear TNT=
+Omega TNT=
+Piston Door TNT=
+Poison TNT=
+Pyramid TNT=
+Random Item TNT=
+Random TNT=
+Random Teleport TNT=
+Remote TNT=
+Reverse TNT=
+Sand Firework TNT=
+Shuffle TNT=
+Snow TNT=
+Sphere TNT=
+Sponge TNT=
+Super House TNT=
+Switch TNT=
+Technical TNT=
+Teleport TNT=
+Trap TNT=
+Tree TNT=
+Wash TNT=
+Water TNT=
+Wooden House TNT=
+
+# Other Nodes
+Glitch Block=
+Meteor=
+Super=
+TNT=
+
+# Items
+Remote=
+Atomic Bomb=
+Demon Core=
+Engine=
+Unstable Particle=
+
+# Messages
+ATOMIC BOMB EXPLODED BY @1!=
+OMEGA ATOMIC BOMB EXPLODED BY @1!=
