@@ -8,7 +8,7 @@ local S = core.get_translator(modname)
 local Stnt = core.get_translator("tnt")
 
 local enable_tnt = core.settings:get_bool("enable_tnt", true)
-assert(enable_tnt)
+if
 
 local tnt_radius = tonumber(core.settings:get("tnt_radius") or 3)
 
@@ -1088,7 +1088,7 @@ _G[modname].register_tnt({
             {modname..":super_diamondblock", modname..":super_diamondblock", modname..":super_diamondblock"}
         }
     },
-    radius = 10,
+    radius = 6,
     boom = function(pos, def, owner)
         add_effects(pos, def.radius, owner)
         _G[modname].square_explode(pos, def.radius, "default:diamondblock", owner:get_player_name())
@@ -1302,7 +1302,7 @@ _G[modname].register_tnt({
             {"default:ice", "default:ice", "default:ice"}
         }
     },
-    radius = 10,
+    radius = 5,
     boom = function(pos, def, owner)
         add_effects(pos, def.radius, owner)
         _G[modname].circular_explode(pos, def.radius, nil, "default:ice", owner:get_player_name())
@@ -1336,7 +1336,8 @@ local disallowed_entities = {
     "decor_api",
     "modern",
     "multidecor",
-    "homedecor_common"
+    "homedecor_common",
+    "enchant"
 }
 
 local function check_entity(name)

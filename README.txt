@@ -1,3 +1,5 @@
+Information about every TNT here: https://skybuilder1717.ru/too_much_tnt/
+
 ================================================================
 Sounds are created by SkyBuilder1717 (CC BY-SA 4.0), unless:
 ================================================================
