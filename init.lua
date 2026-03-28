@@ -756,7 +756,8 @@ _G[modname].register_tnt = function(def, custom)
         mesecons = {effector =
             {action_on =
                 function(pos)
-                    explode(pos)
+                    core.swap_node(pos, {name = name .. "_burning"})
+                    core.registered_nodes[name .. "_burning"].on_construct(pos)
                 end
             }
         },
@@ -1017,20 +1018,18 @@ _G[modname].register_tnt({
         recipe = {
             {"basic_materials:energy_crystal_simple", modname..":engine", "basic_materials:energy_crystal_simple"},
             {"default:tin_ingot", "tnt:tnt", "default:tin_ingot"},
-            {"default:steel_ingot", "bucket:bucket_water", "default:steel_ingot"}
-        },
-        replacements = {
-            {"bucket:bucket_water", "bucket:bucket_empty"}
+            {"default:steel_ingot", "default:tinblock", "default:steel_ingot"}
         }
     },
     boom = function(pos, def, owner)
+        local sound = def.sound or "tnt_explode"
+        core.sound_play(sound, {pos = pos, gain = 2.5,
+                max_hear_distance = math.min(def.radius * 20, 128)}, true)
         add_effects(pos, def.radius, owner)
+        core.remove_node(pos)
         for i = 0, 60 do
-            core.dig_node(pos, owner)
-            if i > 56 then
-                core.set_node(pos, {name = "default:water_source"})
-            end
             pos.y = pos.y - 1
+            core.dig_node(pos, owner)
         end
     end
 })
@@ -1047,10 +1046,14 @@ _G[modname].register_tnt({
         }
     },
     boom = function(pos, def, owner)
+        local sound = def.sound or "tnt_explode"
+        core.sound_play(sound, {pos = pos, gain = 2.5,
+                max_hear_distance = math.min(def.radius * 20, 128)}, true)
         add_effects(pos, def.radius, owner)
+        core.remove_node(pos)
         for _ = 0, 60 do
-            _G[modname].circular_explode(pos, def.radius, nil, nil, owner:get_player_name())
             pos.y = pos.y - 1
+            _G[modname].circular_explode(pos, def.radius, nil, nil, owner:get_player_name())
         end
     end
 })
@@ -2827,9 +2830,9 @@ _G[modname].register_tnt({
     tiles = texture_top(modname.."_wash_background.png", modname.."_title.png", modname.."_wash_top_background.png"),
     craft = {
         recipe = {
-            {"bucket:bucket_river", "bucket:bucket_river", "bucket:bucket_river"},
-            {"bucket:bucket_river", "tnt:tnt", "bucket:bucket_river"},
-            {"bucket:bucket_river", "bucket:bucket_river", "bucket:bucket_river"}
+            {"bucket:bucket_river_water", "bucket:bucket_river_water", "bucket:bucket_river_water"},
+            {"bucket:bucket_river_water", "tnt:tnt", "bucket:bucket_river_water"},
+            {"bucket:bucket_river_water", "bucket:bucket_river_water", "bucket:bucket_river_water"}
         }
     },
     boom = function(pos, def, owner)
@@ -3459,17 +3462,18 @@ _G[modname].register_tnt({
     },
     radius = 2,
     boom = function(pos, def, owner)
-        core.remove_node(pos, def.radius, owner)
+        removetnt(pos, def.radius, owner)
         core.sound_play(modname.."_confetti", {
             pos = pos,
             max_hear_distance = math.min(def.radius * 20, 128)
         }, true)
 
+        pos.y = pos.y + 0.5
         for i = 0, random(12, 20) do
             core.add_particle({
                 pos = pos,
-                velocity = {x=randomFloat(-1.75, 1.75), y=3.5, z=randomFloat(-1.75, 1.75)},
-                acceleration = {x=0, y=-3.5, z=0},
+                velocity = {x=randomFloat(-1.75, 1.75), y=randomFloat(6.5, 7), z=randomFloat(-1.75, 1.75)},
+                acceleration = {x=0, y=-9.80665, z=0}, -- my physics knowledge got to use
                 expirationtime = 5,
                 size = 3,
                 collision_removal = true,
