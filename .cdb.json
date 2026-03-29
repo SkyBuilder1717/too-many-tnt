@@ -1,0 +1,15 @@
+{
+    "type": "MOD",
+    "title": "Too Much TNT!",
+    "ai_disclosure": "NONE",
+    "dev_state": "ACTIVELY_DEVELOPED",
+    "media_license": "CC-BY-SA-4.0",
+    "license": "MIT",
+    "long_description": "Adds many types of TNT, and they're all craftable!\nIf you wanna know every TNT, you should visit a mini wiki about it: https://skybuilder1717.ru/too_much_tnt/",
+    "website": "https://skybuilder1717.ru/too_much_tnt/",
+    "repo": "https://github.com/SkyBuilder1717/too-many-tnt/",
+    "issue_tracker": "https://github.com/SkyBuilder1717/too-many-tnt/issues/",
+    "short_description": "Adds a lot of TNT for Minetest Game to make gameplay more fun!",
+    "name": "too_many_tnt",
+    "tags": ["environment","survival","multiplayer","strategy_rts","pve","pvp","mtg","magic"]
+}
