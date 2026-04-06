@@ -2830,18 +2830,35 @@ _G[modname].register_tnt({
     tiles = texture_top(modname.."_wash_background.png", modname.."_title.png", modname.."_wash_top_background.png"),
     craft = {
         recipe = {
-            {"bucket:bucket_river_water", "bucket:bucket_river_water", "bucket:bucket_river_water"},
-            {"bucket:bucket_river_water", "tnt:tnt", "bucket:bucket_river_water"},
-            {"bucket:bucket_river_water", "bucket:bucket_river_water", "bucket:bucket_river_water"}
+            {"bucket:bucket_river_water", "too_many_tnt:unstable_particle", "bucket:bucket_river_water"},
+            {"too_many_tnt:unstable_particle", "tnt:tnt", "too_many_tnt:unstable_particle"},
+            {"bucket:bucket_river_water", "too_many_tnt:unstable_particle", "bucket:bucket_river_water"}
         }
     },
+    radius = 10,
     boom = function(pos, def, owner)
-        add_effects(pos, def.radius, owner)
+        local radius = def.radius
+
+        local p1 = {x = pos.x - radius, y = pos.y - radius, z = pos.z - radius}
+        local p2 = {x = pos.x + radius, y = pos.y + radius, z = pos.z + radius}
+
+        for x = p1.x, p2.x do
+            for y = p1.y, p2.y do
+                for z = p1.z, p2.z do
+                    if core.is_protected({x=x, y=y, z=z}, owner:get_player_name()) then restore(pos, def); return end
+                end
+            end
+        end
+
+        add_effects(pos, radius, owner)
         core.remove_node(pos)
+
         local sound = def.sound or "tnt_explode"
-        _G[modname].circular_explode(pos, def.radius, nil, "default:river_water_source", owner:get_player_name())
         core.sound_play(sound, {pos = pos, gain = 2.5,
-                max_hear_distance = math.min(def.radius * 20, 128)}, true)
+            max_hear_distance = math.min(radius * 20, 128)}, true)
+
+        core.delete_area(p1, p2)
+        core.emerge_area(p1, p2)
     end
 })
 
