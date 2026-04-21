@@ -1078,6 +1078,8 @@ core.register_craft({
     output = "default:diamondblock 9"
 })
 
+register_fakenode("diamondblock")
+
 _G[modname].register_tnt({
 	name = modname..":diamond",
 	description = S("Diamond TNT"),
@@ -1094,10 +1096,10 @@ _G[modname].register_tnt({
             {modname..":super_diamondblock", modname..":super_diamondblock", modname..":super_diamondblock"}
         }
     },
-    radius = 6,
+    radius = 4,
     boom = function(pos, def, owner)
         add_effects(pos, def.radius, owner)
-        _G[modname].square_explode(pos, def.radius, "default:diamondblock", owner:get_player_name())
+        _G[modname].square_explode(pos, def.radius, "too_many_tnt:fake_diamondblock", owner:get_player_name())
         local sound = def.sound or "tnt_explode"
         core.sound_play(sound, {pos = pos, gain = 2.5,
                 max_hear_distance = math.min(def.radius * 20, 128)}, true)
@@ -1481,7 +1483,7 @@ _G[modname].register_tnt({
         recipe = {
             {"default:dirt_with_grass", "default:dirt_with_grass", "default:dirt_with_grass"},
             {"default:meselamp", "tnt:tnt", "default:meselamp"},
-            {"default:mese", "default:mese", "default:mese"}
+            {"ethereal:crystal_block", "ethereal:crystal_block", "ethereal:crystal_block"}
         }
     },
     boom = function(pos, def, owner)
@@ -2171,8 +2173,13 @@ local function get_nearest_player(pos, exclude_name)
     return nearest
 end
 
-local function restore(pos, def)
-    core.set_node(pos, {type="node", name=modname .. ":" .. def.name})
+local function restore(pos, def, owner)
+    local nname = modname .. ":" .. def.name
+    core.set_node(pos, {type="node", name=nname})
+    def = core.registered_nodes[nname]
+    def.on_construct(pos)
+    local meta = core.get_meta(pos)
+    meta:set_string("owner", owner:get_player_name())
 end
 
 _G[modname].register_tnt({
@@ -2190,7 +2197,7 @@ _G[modname].register_tnt({
         local meta = core.get_meta(pos)
         local placer_name = meta:get_string("owner2")
 
-        if placer_name == "" then restore(pos, def); return end
+        if placer_name == "" then restore(pos, def, owner); return end
 
         local igniter_name = owner:get_player_name()
 
@@ -2202,7 +2209,7 @@ _G[modname].register_tnt({
             local nearest_dist = math.huge
 
             local nearest = get_nearest_player(pos, igniter_name)
-            if not nearest then restore(pos, def); return end
+            if not nearest then restore(pos, def, owner); return end
 
             player1 = owner
             player2 = nearest
@@ -2210,7 +2217,7 @@ _G[modname].register_tnt({
         else
             local placer = core.get_player_by_name(placer_name)
 
-            if not placer then restore(pos, def); return end
+            if not placer then restore(pos, def, owner); return end
 
             player1 = owner
             player2 = placer
@@ -2658,7 +2665,7 @@ _G[modname].register_tnt({
         local owner_name = owner:get_player_name()
 
         local trapped = get_nearest_player(pos, owner_name)
-        if not trapped then restore(pos, def); return end
+        if not trapped then restore(pos, def, owner); return end
 
         local DEPTH = 60
         local LAVA_FROM  = 58
@@ -2845,7 +2852,7 @@ _G[modname].register_tnt({
         for x = p1.x, p2.x do
             for y = p1.y, p2.y do
                 for z = p1.z, p2.z do
-                    if core.is_protected({x=x, y=y, z=z}, owner:get_player_name()) then restore(pos, def); return end
+                    if core.is_protected({x=x, y=y, z=z}, owner:get_player_name()) then restore(pos, def, owner); return end
                 end
             end
         end
@@ -3065,7 +3072,7 @@ _G[modname].register_tnt({
         local owner_name = owner:get_player_name()
 
         local trapped = get_nearest_player(pos, owner_name)
-        if not trapped then restore(pos, def); return end
+        if not trapped then restore(pos, def, owner); return end
         
         add_effects(pos, def.radius, owner)
         removetnt(pos, def.radius, owner)
@@ -3097,7 +3104,7 @@ _G[modname].register_tnt({
         local x = random(-30000, 30000)
 
         local trapped = get_nearest_player(pos, owner_name)
-        if not trapped then restore(pos, def); return end
+        if not trapped then restore(pos, def, owner); return end
         
         add_effects(pos, def.radius, owner)
         removetnt(pos, def.radius, owner)
