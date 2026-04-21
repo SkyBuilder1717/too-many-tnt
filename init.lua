@@ -2177,7 +2177,9 @@ local function restore(pos, def, owner)
     local nname = modname .. ":" .. def.name
     core.set_node(pos, {type="node", name=nname})
     def = core.registered_nodes[nname]
-    def.on_construct(pos)
+    if def.on_construct then
+        def.on_construct(pos)
+    end
     local meta = core.get_meta(pos)
     meta:set_string("owner", owner:get_player_name())
 end
