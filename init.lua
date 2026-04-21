@@ -1078,6 +1078,17 @@ core.register_craft({
     output = "default:diamondblock 9"
 })
 
+local function register_fakenode(name)
+    local ndef = table.copy(core.registered_items["default:" .. name])
+    ndef.is_ground_content = nil
+    ndef.groups["not_in_creative_inventory"] = 1
+    ndef.drop = ""
+    ndef.description = nil
+    ndef.short_description = nil
+    name = modname .. ":fake_" .. name
+    core.register_node(name, ndef)
+end
+
 register_fakenode("diamondblock")
 
 _G[modname].register_tnt({
@@ -1232,17 +1243,6 @@ local function spawnhouse(pos, player, node)
             minus = minus + 1
         end
     end
-end
-
-local function register_fakenode(name)
-    local ndef = table.copy(core.registered_items["default:" .. name])
-    ndef.is_ground_content = nil
-    ndef.groups["not_in_creative_inventory"] = 1
-    ndef.drop = ""
-    ndef.description = nil
-    ndef.short_description = nil
-    name = modname .. ":fake_" .. name
-    core.register_node(name, ndef)
 end
 
 register_fakenode("cobble")
